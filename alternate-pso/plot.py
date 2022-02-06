@@ -49,6 +49,48 @@ def plotGraphs(swarm, function, iteration, plot_range):
     # Return the path to the file
     return filename
 
+def plotGraphs_sgd(coor, function, function_parameters, iteration):
+
+    # For Rosenbrock works better with low values (e.g -2,2)
+    # For Rastrigin, larger are better (e.g -100,100)
+    rangex = [-4, 4]
+    # For Rosenbrock works better with low values (e.g -1,3)
+    # For Rastrigin, larger are better (e.g -100,100)
+    rangey = [-4, 4]
+
+    # Set up the graph for the function
+    xlist = np.linspace(rangex[0], rangex[1], 100)
+    ylist = np.linspace(rangey[0], rangey[1], 100)
+    X, Y = np.meshgrid(xlist, ylist)
+
+    Z = []
+
+    # Calculate the results of the function
+    for i in range(len(X)):
+        Z.append(function([X[i], Y[i]], function_parameters))
+
+    fig, ax = plt.subplots(1, 1)
+    cp = ax.contour(X, Y, Z, 100)
+    fig.colorbar(cp)
+    ax.set_title(function.__name__)
+    ax.set_xlabel("Longitude")
+    ax.set_ylabel("Langtitude")
+    ax.set_xlim([rangex[0], rangex[1]])
+    ax.set_ylim([rangey[0], rangey[1]])
+
+    # Add the particles on the graph
+    plt.scatter(coor[0], coor[1], marker='o', color='red')
+
+    # Save the graph as an image
+    filename = f'images/Epoch_{iteration}_.png'
+    plt.savefig(filename, dpi=96)
+
+    # Cleanup
+    plt.close()
+
+    # Return the path to the file
+    return filename
+
 
 def plotLoss(global_error_plot):
 
@@ -65,9 +107,9 @@ def plotLoss(global_error_plot):
     return filename
 
 
-def createGif(filenames):
+def createGif(filenames, name = 'mygif.gif'):
 
-    with imageio.get_writer('mygif.gif', mode='I') as writer:
+    with imageio.get_writer(name, mode='I') as writer:
         for filename in filenames:
             image = imageio.imread(filename)
             writer.append_data(image)
