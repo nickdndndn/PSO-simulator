@@ -1,6 +1,6 @@
 import functions
 import pso
-import sgd
+import SGD
 
 
 if __name__ == "__main__":
@@ -14,8 +14,8 @@ if __name__ == "__main__":
     dimensions = 2
 
     # Objective Function and the parameters it takes
-    # function = [functions.rosenbrock, [0, 10]]
-    function = [functions.rastrigin, [10]]
+    function = [functions.rosenbrock, [0, 10]]
+    #function = [functions.rastrigin, [10]]
 
     # Parameters a,b,c for PSO (a = inertia weight, b,c learning constants for particle best position and global best position)
     a = 0.5  # = 0 No influence from the previous velocity, = 1 full influence of the previous velocity
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # plot_range = [[-2, 2], [-1, 3]]  # Better for Rosenbrock
 
     # Run PSO
-    pso.PSO(particle_number, dimensions, function,
+    '''pso.PSO(particle_number, dimensions, function,
             a, b, c, dynamic_parameter_adjustment, boundary, neighbourhood_options, start_velocity_limit, velocity_limit, space_limit, iterations, plot_range)
-
-    # sgd.sgd(function[1], func_name="rosenbrock", iterations=50, lr=0.001)
+'''
+    SGD.sgd(function[1], func_name="rosenbrock", iterations=100, lr=0.01)

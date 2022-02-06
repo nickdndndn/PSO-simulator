@@ -73,9 +73,9 @@ def plotGraphs_sgd(coor, function, function_parameters, iteration):
     fig, ax = plt.subplots(1, 1)
     cp = ax.contour(X, Y, Z, 100)
     fig.colorbar(cp)
-    ax.set_title(function.__name__)
-    ax.set_xlabel("Longitude")
-    ax.set_ylabel("Langtitude")
+    ax.set_title(function.__name__ + ' iteration: %s' % iteration)
+    ax.set_xlabel("X coordinate")
+    ax.set_ylabel("Y coordinate")
     ax.set_xlim([rangex[0], rangex[1]])
     ax.set_ylim([rangey[0], rangey[1]])
 
@@ -93,12 +93,12 @@ def plotGraphs_sgd(coor, function, function_parameters, iteration):
     return filename
 
 
-def plotLoss(global_error_plot):
+def plotLoss(global_error_plot, name = "f'images/Loss.png'"):
 
     plt.plot(global_error_plot[0], global_error_plot[1])
 
     # Save the graph as an image
-    filename = f'images/Loss.png'
+    filename = name
     plt.savefig(filename, dpi=96)
 
     # Cleanup

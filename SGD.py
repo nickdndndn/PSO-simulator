@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import functions
-# import tensorflow as tf
+import tensorflow as tf
 import plot
 
 
@@ -10,8 +10,8 @@ def sgd(parameters, func_name, iterations, lr):
     loss = []
 
     opt = tf.keras.optimizers.SGD(learning_rate=lr)
-    var1 = tf.Variable(4.0)
-    var2 = tf.Variable(-3.0)
+    var1 = tf.Variable(1.0)
+    var2 = tf.Variable(2.0)
     func = None
     #
     if func_name == 'rosenbrock':
@@ -35,5 +35,9 @@ def sgd(parameters, func_name, iterations, lr):
 
     plot.createGif(filenames, name="sgd_gif.gif")
 
-    plt.plot(loss)
-    plt.show()
+    plot.plotLoss([var1.numpy(), var2.numpy()], name = "f'images/Loss_sgd.png'")
+    #plt.plot(loss)
+    #plt.title("SGD Loss")
+    #plt.xlabel('Epochs')
+    #plt.ylabel('Loss')
+    #plt.show()
