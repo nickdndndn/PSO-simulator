@@ -1,5 +1,6 @@
 import functions
 import pso
+import sgd
 
 
 if __name__ == "__main__":
@@ -67,6 +68,5 @@ if __name__ == "__main__":
     # Run PSO
     pso.PSO(particle_number, dimensions, function,
             a, b, c, dynamic_parameter_adjustment, boundary, neighbourhood_options, start_velocity_limit, velocity_limit, space_limit, iterations, plot_range)
-    
-    SGD.sgd(function_parameters, func_name="rosenbrock", iterations=50, lr=0.001)
-    
+
+    sgd.sgd(function[1], func_name="rosenbrock", iterations=50, lr=0.001)
