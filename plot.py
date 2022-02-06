@@ -104,9 +104,6 @@ def plotLoss(global_error_plot):
     # Cleanup
     plt.close()
 
-    # Return the path to the file
-    return filename
-
 
 def createGif(filenames, name='mygif.gif'):
 
