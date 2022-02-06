@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     # Objective Function and the parameters it takes
     # function = [functions.rosenbrock, [0, 10]]
-    function = [functions.rastrigin, [2]]
+    function = [functions.rastrigin, [10]]
 
     # Parameters a,b,c for PSO (a = inertia weight, b,c learning constants for particle best position and global best position)
     a = 0.5  # = 0 No influence from the previous velocity, = 1 full influence of the previous velocity

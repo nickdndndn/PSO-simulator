@@ -49,6 +49,7 @@ def plotGraphs(swarm, function, iteration, plot_range):
     # Return the path to the file
     return filename
 
+
 def plotGraphs_sgd(coor, function, function_parameters, iteration):
 
     # For Rosenbrock works better with low values (e.g -2,2)
@@ -94,7 +95,7 @@ def plotGraphs_sgd(coor, function, function_parameters, iteration):
 
 def plotLoss(global_error_plot):
 
-    plt.plot(global_error_plot[0], global_error_plot[1], 'ro')
+    plt.plot(global_error_plot[0], global_error_plot[1])
 
     # Save the graph as an image
     filename = f'images/Loss.png'
@@ -107,7 +108,7 @@ def plotLoss(global_error_plot):
     return filename
 
 
-def createGif(filenames, name = 'mygif.gif'):
+def createGif(filenames, name='mygif.gif'):
 
     with imageio.get_writer(name, mode='I') as writer:
         for filename in filenames:
