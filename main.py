@@ -1,46 +1,72 @@
-from matplotlib import pyplot as plt
-from pso import *
-import numpy as np
-
-def rosenbrock(x,y):
-    a = 0
-    b = 10
-    return np.add(np.square(np.subtract(a,x)),np.square(np.multiply(b,(y-np.square(x)))))
-
-def rastrigin(x,y):
-    n = 0 
-    return 10 * n + (x**2 - 10 * np.cos(2*np.pi * x)) #np.sum might be needed here
+import functions
+import pso
 
 
-if __name__ == '__main__':
-    #np.random.seed(2)
+if __name__ == "__main__":
 
-    #Hyparameters
-    N = 10
-    c1 = 2
-    c2 = 2
-    w = 0.5
-    MaxIter = 20
+    # Initialise PSO parameter
 
-    #initialize algorithm
-    ps = PSO(N)
-    ps.train(c1, c2, w, MaxIter)
+    # Number of Particles
+    particle_number = 100
 
+    # Dimensions for each particle
+    dimensions = 2
 
-# plot
-'''
-    xlist = np.linspace(-2., 2., 100)
-    ylist = np.linspace(-1., 3., 100)
-    X, Y = np.meshgrid(xlist, ylist)
-    Z = main.rosenbrock(X, Y)
-    fig, ax = plt.subplots(1, 1)
-    cp = ax.contour(X, Y, Z, 100)
-    fig.colorbar(cp)
-    ax.set_title('Rosenbrock space')
-    ax.set_xlabel('Longtitude')
-    ax.set_ylabel('Langtitude')
-    for particle in ps.particles:
-        plt.scatter(particle.pos[0], particle.pos[1], marker='o', color='red')
-    plt.show()
+    # Objective Function and the parameters it takes
+    # function = [functions.rosenbrock, [0, 10]]
+    function = [functions.rastrigin, [2]]
 
-'''
+    # Parameters a,b,c for PSO (a = inertia weight, b,c learning constants for particle best position and global best position)
+    a = 0.5  # = 0 No influence from the previous velocity, = 1 full influence of the previous velocity
+    b = 2  # = 0 No influence from the personal best position, = 1 full influence of the personal best position
+    c = 2  # = 0 No influence from the global best position, = 1 full influence of the global best position
+
+    # Initialise/Activate a parameter adjustment
+    # For each index(0=a,1=b,2=c) ->
+    # (subindex 0 -> value=0 activates adjustment, value=1 increases parameter, value=2 decreases parameter)
+    # (subindex 1 -> Adjustment  application rate - after how many epochs)
+    # (subindex 2 -> Adjustment rate - amount of reduction/increase)
+    # (subindex 3 -> stop value)
+    dynamic_parameter_adjustment = [
+        [2, 9, 0.1, 0.1],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+    ]
+
+    # Range for the randomisation of starting positions of particles
+    # Try a difference of 1000 or more to spread them really apart / try placeing them away from 0 which is a global min for both objective functions that are being measured by default
+    # boundary = [-100, 100]
+    boundary = [-8000, -4000]
+
+    # Neighbourhood range and adjustment.
+    # First parameter activates/deactivates neighbourhood topology
+    # Second parameter initialises the visibility range for each particle
+    # Third parameter activates/deactivates visibility increase
+    # Fourth parameter sets the application rate - after how many epochs
+    # Fifth parameter sets the amount of increase
+    # Sixth parameter activates/deactivates neighbourhood switch to global
+    # Seventh parameter sets the threshold over which the neighbourhood becomes global
+    neighbourhood_options = [True, 250, True, 9, 500, True, 50]
+
+    # Limit for the randomisation of starting velocities of particles [(]-start_velocity_limit,+start_velocity_limit]
+    start_velocity_limit = 1
+
+    # Limit for min/max velocity a particle can have. Clipping occurs if it ends up outside the threshold [-velocity_limit,+velocity_limit]
+    velocity_limit = 10000000
+
+    # Limit the space the particles can occupy. (x,y : [-space_limit,+space_limit]
+    space_limit = 10000  # For Rastrigin [-10000,10000] for x,y
+
+    # Number of PSO iterations
+    iterations = 100
+
+    # Plot Range
+    plot_range = [[-10000, 10000], [-10000, 10000]]  # Better for Rastrigin
+    # plot_range = [[-2, 2], [-1, 3]]  # Better for Rosenbrock
+
+    # Run PSO
+    pso.PSO(particle_number, dimensions, function,
+            a, b, c, dynamic_parameter_adjustment, boundary, neighbourhood_options, start_velocity_limit, velocity_limit, space_limit, iterations, plot_range)
+    
+    SGD.sgd(function_parameters, func_name="rosenbrock", iterations=50, lr=0.001)
+    
