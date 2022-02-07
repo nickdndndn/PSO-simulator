@@ -11,7 +11,7 @@ def sgd(parameters, func_name, iterations, lr):
 
     opt = tf.keras.optimizers.SGD(learning_rate=lr)
     var1 = tf.Variable(-2.)
-    var2 = tf.Variable(-4.)
+    var2 = tf.Variable(-3.)
     func = None
     #
     if func_name == 'rosenbrock':
@@ -19,9 +19,9 @@ def sgd(parameters, func_name, iterations, lr):
                             ** 2) + parameters[1]*((var1-(var2**2))**2)
         func = functions.rosenbrock
     elif func_name == 'rastrigin':
-        def cost(): return (var1**2 - parameters * np.cos(2*np.pi * var1)) + \
-            (var2**2 - parameters * np.cos(2*np.pi * var2))
-        func = functions.rastrigin()
+        print(parameters[0])
+        def cost(): return (var1 **2 - parameters[0] * np.cos(2*np.pi * var1)) + (var2**2 - parameters[0] * np.cos(2*np.pi * var2))
+        func = functions.rastrigin
     # First step is `- learning_rate * grad`
 
     for i in range(iterations):
@@ -35,6 +35,8 @@ def sgd(parameters, func_name, iterations, lr):
 
     plot.createGif(filenames, name="sgd_gif.gif")
 
+    #print(loss)
+    #print(list(range(0, 100)))
     plot.plotLoss([loss,list(range(0, 100))], name = "Loss_sgd.png")
     #plt.plot(loss)
     #plt.title("SGD Loss")

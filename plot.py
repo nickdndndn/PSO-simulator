@@ -80,7 +80,7 @@ def plotGraphs_sgd(coor, function, function_parameters, iteration):
     ax.set_ylim([rangey[0], rangey[1]])
 
     # Add the particles on the graph
-    plt.scatter(coor[0], coor[1], marker='o', color='red')
+    plt.scatter(coor[0], coor[1], s=300, marker='o', color='red', zorder=2)
 
     # Save the graph as an image
     filename = f'images/Epoch_{iteration}_.png'
@@ -95,9 +95,12 @@ def plotGraphs_sgd(coor, function, function_parameters, iteration):
 
 def plotLoss(global_error_plot, name = "f'images/Loss.png'"):
 
-    plt.plot(global_error_plot[0], global_error_plot[1])
-
-    # Save the graph as an image
+    #print(global_error_plot[1])
+    #print(global_error_plot[0])
+    plt.plot(global_error_plot[1], global_error_plot[0])
+    plt.title("SGD Loss")
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
     filename = name
     plt.savefig(filename, dpi=96)
 
