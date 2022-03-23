@@ -1,7 +1,26 @@
-CODE DIVISION :
+# Particle Swarm Optimization
 
-*At first we each made their own version of the PSO/Particle/Function methods/classes in order to for each of us to understand how it works. Then we saw each other's code, made a unified approach and split the implementation into the following tasks (while adding things that were missing)
+The goal of the program is to evaluate properties of PSO and compare PSO against gradient descent.<br />
+Used simulations of the pros and cons of PSO and to find out if it makes sense to combine PSO and gradient descent.<br />
 
-Elena Kane i6289291 - Implementation of Rastrigin and Rosenbrock. Implementation of Particle class in PSO  <br />
-Nikolaos Ntantis i6273751 - Implementation of Stochastic Gradient Descent. Implementation of Plot functions <br />
-Ioannis Montesantos i6292068 - Implementation of Main function. Implementation of PSO class. <br />
+## Benchmark functions
+Benchmark functions help us to understand if our algorithm works so we used:
+* Rosenbrock
+* Rastrigin
+
+## Installation
+The program is in Python <br />
+In order to use the code you need to install the following  packages
+   ```sh
+    import numpy as np
+    from matplotlib import pyplot as plt
+    import imageio
+    import random
+    import tensorflow as tf
+   ```
+
+## Contributors
+    * Elena Kane
+    * Nikolaos Ntantis
+    * Ioannis Montesantos
+
